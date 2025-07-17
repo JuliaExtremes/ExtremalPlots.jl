@@ -7,7 +7,7 @@ using ExtremePlots
 
 pd = Exponential(1.)
 
-y = rand(pd, 100)
+y = rand(pd, 1000)
 
 p = ExtremePlots.probplot(pd, y)
 p = ExtremePlots.probplot(pd, y; title="Probability plot")
@@ -21,3 +21,7 @@ p = ExtremePlots.returnlevelplot(pd, y; title="Return level plot")
 p = ExtremePlots.histplot(pd, y)
 p = ExtremePlots.histplot(pd, y; title="Histogram")
 
+x = rand(pd, 1000)
+
+p = ExtremePlots.qqplot(x, y)
+p = ExtremePlots.qqplot(x, y, interpolation=false)
