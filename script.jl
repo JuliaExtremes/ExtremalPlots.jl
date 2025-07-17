@@ -17,3 +17,7 @@ p = ExtremePlots.qqplot(pd, y; title="Quantile-Quantile plot")
 
 p = ExtremePlots.returnlevelplot(pd, y)
 p = ExtremePlots.returnlevelplot(pd, y; title="Return level plot")
+
+p = ExtremePlots.histplot(pd, y)
+p = ExtremePlots.histplot(pd, y; title="Histogram")
+
