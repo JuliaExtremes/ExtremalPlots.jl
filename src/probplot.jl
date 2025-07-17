@@ -37,7 +37,10 @@ y = rand(Gumbel(), 100)
 p = probplot(Gumbel(), y)
 ```
 """
-function probplot(pd::Distribution, y::AbstractVector{<:Real}; title::String="")
+function probplot(pd::Distribution, y::AbstractVector{<:Real};
+    title::String = "",
+    xlabel::String = "Empirical probability",
+    ylabel::String = "Estimated probability")
     
     empirical_probs, theoretical_probs = compute_pp_coordinates(pd, y)
     
@@ -45,7 +48,7 @@ function probplot(pd::Distribution, y::AbstractVector{<:Real}; title::String="")
     l2 = layer(y = empirical_probs[[1, end]], x = empirical_probs[[1, end]], Geom.line, Theme(default_color="black", line_style=[:dash]))
 
     return Gadfly.plot(l2, l1,
-        Guide.xlabel("Empirical probability"), Guide.ylabel("Estimated probability"), Guide.title(title),
+        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
         Theme(discrete_highlight_color=c->nothing, default_color="grey"))
 end
 

@@ -34,4 +34,5 @@ y = rand(pd, 300)
 fm = gevfit(y)
 
 ExtremePlots.qqplot(fm)
+ExtremePlots.probplot(fm)
 
