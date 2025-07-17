@@ -25,3 +25,5 @@ x = rand(pd, 1000)
 
 p = ExtremePlots.qqplot(x, y)
 p = ExtremePlots.qqplot(x, y, interpolation=false)
+
+p = ExtremePlots.mrlplot(y)

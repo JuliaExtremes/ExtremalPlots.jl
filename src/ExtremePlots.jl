@@ -4,6 +4,7 @@ using Distributions, Gadfly
 import Plots
 
 include("histplot.jl")
+include("mrlplot.jl")
 include("probplot.jl")
 include("qqplot.jl")
 include("returnlevelplot.jl")
