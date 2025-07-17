@@ -72,7 +72,10 @@ y = rand(Gumbel(), 100)
 p = qqplot(Gumbel(), y)
 ```
 """
-function qqplot(pd::Distribution, y::AbstractVector{<:Real}; title::String="")
+function qqplot(pd::Distribution, y::AbstractVector{<:Real};
+    title::String = "",
+    xlabel::String = "Empirical quantile",
+    ylabel::String = "Estimated quantile")
     
     empirical_quantiles, theoretical_quantiles = compute_qq_coordinates(pd, y)
     
@@ -80,7 +83,7 @@ function qqplot(pd::Distribution, y::AbstractVector{<:Real}; title::String="")
     l2 = layer(x = empirical_quantiles[[1, end]], y = empirical_quantiles[[1, end]], Geom.line, Theme(default_color="black", line_style=[:dash]))
 
     return Gadfly.plot(l2, l1,
-        Guide.xlabel("Empirical quantile"), Guide.ylabel("Estimated quantile"), Guide.title(title),
+        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
         Theme(discrete_highlight_color=c->nothing, default_color="grey"))
 end
 

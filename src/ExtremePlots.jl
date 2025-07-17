@@ -1,8 +1,8 @@
 module ExtremePlots
 
-using Distributions, Gadfly
-import Plots
+using Distributions, Extremes, Gadfly
 
+include("extremes.jl")
 include("histplot.jl")
 include("mrlplot.jl")
 include("probplot.jl")

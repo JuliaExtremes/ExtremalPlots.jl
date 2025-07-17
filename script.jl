@@ -1,4 +1,4 @@
-using Distributions
+using Distributions, Extremes
 
 using Pkg
 pkg"activate ."
@@ -27,3 +27,11 @@ p = ExtremePlots.qqplot(x, y)
 p = ExtremePlots.qqplot(x, y, interpolation=false)
 
 p = ExtremePlots.mrlplot(y)
+
+pd = GeneralizedExtremeValue(0, 1, 0)
+y = rand(pd, 300)
+
+fm = gevfit(y)
+
+ExtremePlots.qqplot(fm)
+
