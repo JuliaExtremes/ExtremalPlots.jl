@@ -36,4 +36,5 @@ fm = gevfit(y)
 ExtremePlots.qqplot(fm)
 ExtremePlots.probplot(fm)
 ExtremePlots.histplot(fm)
+ExtremePlots.returnlevelplot(fm)
 

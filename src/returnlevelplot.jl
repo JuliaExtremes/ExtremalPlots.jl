@@ -69,7 +69,10 @@ y = rand(Gumbel(0, 1), 100)
 returnlevelplot(Gumbel(0, 1), y, title="Return level plot")
 ```
 """
-function returnlevelplot(pd::Distribution, y::AbstractVector{<:Real}; title::String="")
+function returnlevelplot(pd::Distribution, y::AbstractVector{<:Real};
+    title::String = "",
+    xlabel::String = "Return Period",
+    ylabel::String = "Return Level")
 
     empirical_quantile, empirical_return_period, theoretical_quantile = compute_rl_coordinates(pd, y)
     

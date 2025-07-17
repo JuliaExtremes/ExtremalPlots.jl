@@ -54,3 +54,19 @@ function qqplot(fm::AbstractFittedExtremeValueModel;
     return ExtremePlots.qqplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
     
 end
+
+function returnlevelplot(fm::AbstractFittedExtremeValueModel;
+    title::String = "",
+    xlabel::String = "Return period",
+    ylabel::String = "Return level"
+)
+
+    if isstationary(fm.model)
+        values = fm.model.data.value
+        pd = Extremes.getdistribution(fm)[]
+        return ExtremePlots.returnlevelplot(pd, values; title=title, xlabel=xlabel, ylabel=ylabel)
+    else
+        @warn "The graph is optimized for stationary models; the provided model is not stationary."
+        return nothing
+    end
+end
