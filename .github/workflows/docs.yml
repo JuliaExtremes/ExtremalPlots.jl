@@ -30,5 +30,6 @@ jobs:
 
       - name: Build and deploy documentation
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}       # For authentication via GitHub Actions token
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: julia --project=docs/ docs/make.jl
