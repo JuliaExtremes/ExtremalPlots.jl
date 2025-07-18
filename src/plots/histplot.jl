@@ -1,7 +1,7 @@
 function histplot(pd::Distribution, y::AbstractVector{<:Real};
     title::String = "",
     xlabel::String = "Data",
-    ylabel::String = "Density")
+    ylabel::String = "Model density")
 
     nbin = ceil(Int64, sqrt(length(y)))
 

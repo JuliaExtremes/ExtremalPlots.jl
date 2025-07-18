@@ -10,4 +10,14 @@ include("plots/returnlevelplot.jl")
 include("extremes_structures.jl")
 include("utils.jl")
 
+export
+    probplot,
+    qqplot,
+    qqplotci,
+    returnlevelplot,
+    returnlevelplotci,
+    histplot,
+    diagnosticplots,
+    mrlplot
+
 end

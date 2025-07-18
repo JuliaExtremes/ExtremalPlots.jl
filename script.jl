@@ -1,4 +1,4 @@
-using Distributions, Extremes
+using Distributions, Extremes, Gadfly
 
 using Pkg
 pkg"activate ."
@@ -40,4 +40,7 @@ ExtremePlots.returnlevelplot(fm)
 
 ExtremePlots.qqplotci(fm)
 ExtremePlots.returnlevelplotci(fm)
+
+Gadfly.set_default_plot_size(21cm ,16cm)
+ExtremePlots.diagnosticplots(fm)
 

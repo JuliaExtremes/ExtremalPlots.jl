@@ -1,13 +1,33 @@
 
-
+# TODO move in Extremes.jl
 function isstationary(fm::AbstractExtremeValueModel)
     return Extremes.getcovariatenumber(fm) == 0
+end
+
+"""
+    diagnosticplots(fm::AbstractFittedExtremeValueModel)
+
+Diagnostic plots
+"""
+function diagnosticplots(fm::AbstractFittedExtremeValueModel)
+
+    f1 = probplot(fm)
+    f2 = qqplot(fm)
+    f3 = histplot(fm)
+
+    if isstationary(fm.model)
+        f4 = returnlevelplot(fm)
+    else
+        f4 = Gadfly.plot()
+    end
+
+    return gridstack([f1 f2; f3 f4])
 end
 
 function histplot(fm::AbstractFittedExtremeValueModel;
     title::String = "",
     xlabel::String = "Data",
-    ylabel::String = "Density")
+    ylabel::String = "Model density")
 
     if isstationary(fm.model)
         m = fm.model.data.value
@@ -23,8 +43,8 @@ end
 
 function probplot(fm::AbstractFittedExtremeValueModel;
     title::String = "",
-    xlabel::String = "Empirical quantile",
-    ylabel::String = "Estimated quantile")
+    xlabel::String = "Empirical probability",
+    ylabel::String = "Model probability")
 
     if isstationary(fm.model)
         m = fm.model.data.value
@@ -41,7 +61,7 @@ end
 function qqplot(fm::AbstractFittedExtremeValueModel;
     title::String = "",
     xlabel::String = "Empirical quantile",
-    ylabel::String = "Estimated quantile")
+    ylabel::String = "Model quantile")
 
     if isstationary(fm.model)
         m = fm.model.data.value
