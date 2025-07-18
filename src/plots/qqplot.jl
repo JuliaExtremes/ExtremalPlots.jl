@@ -66,7 +66,7 @@ A `Gadfly.Plot` object.
 
 ### Example
 ```julia
-using Distributions, ExtremePlots
+using Distributions, ExtremalPlots
 
 y = rand(Gumbel(), 100)
 p = qqplot(Gumbel(), y)

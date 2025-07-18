@@ -1,6 +1,6 @@
 # Diagnostic plots
 
-This page demonstrates how to use the diagnostic plots from the ExtremePlots.jl package with the data structures provided by Extremes.jl.
+This page demonstrates how to use the diagnostic plots from the ExtremalPlots.jl package with the data structures provided by Extremes.jl.
 
 ## Setup
 
@@ -12,7 +12,7 @@ import Cairo, Fontconfig
 
 Load the required packages:
 ```@example extremes
-using Distributions, Extremes, ExtremePlots, Gadfly
+using Distributions, Extremes, ExtremalPlots, Gadfly
 ```
 
 Simulate data from a Generalized Extreme Value (GEV) distribution:
@@ -32,7 +32,7 @@ fm = gevfit(y)
 Displays a histogram of the data with the distribution overlay.
 
 ```@example extremes
-ExtremePlots.histplot(fm)
+ExtremalPlots.histplot(fm)
 ```
 
 ## Probability-Probability (PP) plot
@@ -40,21 +40,21 @@ ExtremePlots.histplot(fm)
 Compares empirical and model probabilities.
 
 ```@example extremes
-ExtremePlots.probplot(fm)
+ExtremalPlots.probplot(fm)
 ```
 
 ## Quantile-Quantile (QQ) plot
 
 Compares empirical and model quantiles.
 ```@example extremes
-ExtremePlots.qqplot(fm)
+ExtremalPlots.qqplot(fm)
 ```
 
 ## Return level plot
 
 Displays empirical and model-predicted return levels as a function of the return period.
 ```@example extremes
-ExtremePlots.returnlevelplot(fm)
+ExtremalPlots.returnlevelplot(fm)
 ```
 
 ## Panel of diagnostic plots
@@ -63,5 +63,5 @@ Compiles in a panel the diagnostic plots
 
 ```@example extremes
 Gadfly.set_default_plot_size(21cm ,16cm)
-ExtremePlots.diagnosticplots(fm)
+ExtremalPlots.diagnosticplots(fm)
 ```

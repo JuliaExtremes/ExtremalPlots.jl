@@ -1,6 +1,6 @@
 # Diagnostic plots
 
-This page illustrates diagnostic plots provided by the `ExtremePlots.jl` package. These plots help assess the fit of extreme value models and explore the distribution of extreme data.
+This page illustrates diagnostic plots provided by the `ExtremalPlots.jl` package. These plots help assess the fit of extreme value models and explore the distribution of extreme data.
 
 ## Setup
 
@@ -11,7 +11,7 @@ Random.seed!(12345)  # For reproducible examples
 
 Load the required packages:
 ```@example plots
-using Distributions, ExtremePlots, Gadfly
+using Distributions, ExtremalPlots, Gadfly
 ```
 
 Simulate data from a Generalized Extreme Value (GEV) distribution:

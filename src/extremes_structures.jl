@@ -37,7 +37,7 @@ function histplot(fm::AbstractFittedExtremeValueModel;
         pd = Extremes.standarddist(fm.model)
     end
 
-    return ExtremePlots.histplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
+    return ExtremalPlots.histplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
     
 end
 
@@ -54,7 +54,7 @@ function probplot(fm::AbstractFittedExtremeValueModel;
         pd = Extremes.standarddist(fm.model)
     end
 
-    return ExtremePlots.probplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
+    return ExtremalPlots.probplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
     
 end
 
@@ -71,7 +71,7 @@ function qqplot(fm::AbstractFittedExtremeValueModel;
         pd = Extremes.standarddist(fm.model)
     end
 
-    return ExtremePlots.qqplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
+    return ExtremalPlots.qqplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
     
 end
 
@@ -84,7 +84,7 @@ function returnlevelplot(fm::AbstractFittedExtremeValueModel;
     if isstationary(fm.model)
         values = fm.model.data.value
         pd = Extremes.getdistribution(fm)[]
-        return ExtremePlots.returnlevelplot(pd, values; title=title, xlabel=xlabel, ylabel=ylabel)
+        return ExtremalPlots.returnlevelplot(pd, values; title=title, xlabel=xlabel, ylabel=ylabel)
     else
         @warn "The graph is optimized for stationary models; the provided model is not stationary."
         return nothing

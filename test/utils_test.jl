@@ -3,7 +3,7 @@
             n = 10
             data = -1 * collect(1:n)
 
-            y, p = ExtremePlots.ecdf(data)
+            y, p = ExtremalPlots.ecdf(data)
 
             # y is length n and sorted
             @test length(y) == n

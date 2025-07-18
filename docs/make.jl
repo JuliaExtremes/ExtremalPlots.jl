@@ -1,12 +1,12 @@
 using Documenter
-using ExtremePlots
+using ExtremalPlots
 using Distributions, Extremes, Gadfly
 
 # Determine if we're running in a CI environment
 CI = get(ENV, "CI", nothing) == "true"
 
 makedocs(
-    sitename = "ExtremePlots.jl",
+    sitename = "ExtremalPlots.jl",
     format = Documenter.HTML(
         prettyurls = CI,
         size_threshold_warn = 10^8,    # Optional: warning threshold for asset size
@@ -24,7 +24,7 @@ makedocs(
 
 if CI
     deploydocs(
-        repo = "github.com/JuliaExtremes/ExtremePlots.jl.git",
+        repo = "github.com/JuliaExtremes/ExtremalPlots.jl.git",
         devbranch = "main",
         versions = ["main" => "dev", "v#.#", "stable" => "v^"],
         )

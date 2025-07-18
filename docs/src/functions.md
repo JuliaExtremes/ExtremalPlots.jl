@@ -3,7 +3,7 @@
 ## Diagnostic plots
 
 ```@autodocs
-Modules = [ExtremePlots]
+Modules = [ExtremalPlots]
 Private = false
 Order = [:function]
 Pages = [
@@ -17,7 +17,7 @@ Pages = [
 ## Diagnostic plots for the Extremes.jl structures
 
 ```@autodocs
-Modules = [ExtremePlots]
+Modules = [ExtremalPlots]
 Private = false
 Order = [:function]
 Pages = [
@@ -28,7 +28,7 @@ Pages = [
 ## Utility functions
 
 ```@autodocs
-Modules = [ExtremePlots]
+Modules = [ExtremalPlots]
 Private = false
 Order = [:function]
 Pages = [
