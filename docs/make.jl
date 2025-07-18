@@ -26,7 +26,7 @@ if CI
     deploydocs(
         repo = "github.com/JuliaExtremes/ExtremePlots.jl.git",
         devbranch = "main",
-        versions = ["main" => "main", "v#.#", "stable" => "v^"],
+        versions = ["main" => "dev", "v#.#", "stable" => "v^"],
         )
 end
 
