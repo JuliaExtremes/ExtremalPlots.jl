@@ -1,0 +1,34 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main     # Pushes to main
+      - dev      # Pushes to dev
+    tags: '*'     # Any tag
+
+  pull_request:
+    branches:
+      - main     # PRs targeting main
+      - dev      # PRs targeting dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@latest
+        with:
+          version: '1'
+
+      - name: Install dependencies
+        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+
+      - name: Build and deploy documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}       # For authentication via GitHub Actions token
+        run: julia --project=docs/ docs/make.jl
