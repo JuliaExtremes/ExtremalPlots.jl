@@ -25,7 +25,8 @@ makedocs(
 if CI
     deploydocs(
         repo = "github.com/JuliaExtremes/ExtremePlots.jl.git",
-        devbranch = "main",  # or "dev" or whatever your default branch is
+        devbranch = "main",
+        versions = ["main" => "main", "v#.#", "stable" => "v^"],
         )
 end
 
