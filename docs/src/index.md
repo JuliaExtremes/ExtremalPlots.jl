@@ -1,9 +1,6 @@
 # ExtremePlots
 
-[![Build Status](https://github.com/JuliaExtremes/ExtremePlots.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaExtremes/ExtremePlots.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![documentation stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://JuliaExtremes.github.io/ExtremePlots.jl/stable/)
-
-**ExtremePlots.jl** is a Julia package that offers plotting tools specifically designed for extreme value analysis, with [`Gadfly.jl`](https://github.com/GiovineItalia/Gadfly.jl/tree/master) as the plotting backend.
+**ExtremePlots.jl** provides plotting tools tailored for extreme value analysis in Julia.
 
 ## Features
 - Histogram plot  

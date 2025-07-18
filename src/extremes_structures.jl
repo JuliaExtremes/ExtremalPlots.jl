@@ -163,6 +163,49 @@ return Gadfly.plot(
     Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title))
 end
 
+"""
+    returnlevelplotci(fm::AbstractFittedExtremeValueModel, α::Real = 0.05;
+                      title::String = "",
+                      xlabel::String = "Return period",
+                      ylabel::String = "Return level")
+
+Generates a return level plot with pointwise confidence or credible intervals
+for a fitted extreme value model.
+
+
+## Details
+The return level plot displays the empirical and model-based return levels against
+return periods on a logarithmic x-axis, with confidence intervals of level `1 - α`.
+
+### Arguments
+- `fm`: A fitted extreme value model (`AbstractFittedExtremeValueModel`)
+- `α`: Significance level for the confidence interval (default: `0.05`)
+- `title`: Title of the plot (optional)
+- `xlabel`, `ylabel`: Axis labels (optional)
+
+### Returns
+- A `Gadfly.Plot` object showing:
+  - Empirical return levels (points)
+  - Model-predicted return levels (dashed line)
+  - Confidence or credible interval (shaded ribbon)
+
+### Notes
+- This function is currently only available for **stationary** models (i.e., without covariates).
+- Return periods are displayed on a base-10 logarithmic scale.
+
+### See also
+- [`qqplotci`](@ref), [`returnlevelplot`](@ref)
+
+### Example
+```julia
+using Distributions, Extremes
+
+pd = GeneralizedExtremeValue(0, 1, 0)
+y = rand(pd, 300)
+fm = gevfit(y)
+
+returnlevelplotci(fm)
+"""
 function returnlevelplotci(fm::AbstractFittedExtremeValueModel, α::Real=.05,
     title::String = "",
     xlabel::String = "Return period",
