@@ -2,12 +2,12 @@ module ExtremePlots
 
 using Distributions, Extremes, Gadfly
 
-include("extremes.jl")
-include("histplot.jl")
-include("mrlplot.jl")
-include("probplot.jl")
-include("qqplot.jl")
-include("returnlevelplot.jl")
+include("plots/histplot.jl")
+include("plots/mrlplot.jl")
+include("plots/probplot.jl")
+include("plots/qqplot.jl")
+include("plots/returnlevelplot.jl")
+include("extremes_structures.jl")
 include("utils.jl")
 
 end
