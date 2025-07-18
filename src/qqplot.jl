@@ -5,14 +5,14 @@ Compute the coordinates for a quantile-quantile plot comparing the empirical dis
 
 ## Details
 
-Returns a tuple `(empirical_quantiles, theoretical_quantiles)`, where:
+Returns a tuple `(empirical_quantiles, model_quantiles)`, where:
 - `empirical_quantiles` are the empirical quantiles using the Gumbel plotting position.
-- `theoretical_quantiles` are the corresponding quantiles of `pd`.
+- `model_quantiles` are the corresponding quantiles of `pd`.
 """
 function compute_qq_coordinates(pd::Distribution, y::AbstractVector{<:Real})
     empirical_quantiles, p = ecdf(y)
-    theoretical_quantiles = quantile.(pd, p)
-    return empirical_quantiles, theoretical_quantiles
+    model_quantiles = quantile.(pd, p)
+    return empirical_quantiles, model_quantiles
 end
 
 """
@@ -75,16 +75,14 @@ p = qqplot(Gumbel(), y)
 function qqplot(pd::Distribution, y::AbstractVector{<:Real};
     title::String = "",
     xlabel::String = "Empirical quantile",
-    ylabel::String = "Estimated quantile")
+    ylabel::String = "Model quantile")
     
-    empirical_quantiles, theoretical_quantiles = compute_qq_coordinates(pd, y)
-    
-    l1 = layer(x = empirical_quantiles, y = theoretical_quantiles, Geom.point)
-    l2 = layer(x = empirical_quantiles[[1, end]], y = empirical_quantiles[[1, end]], Geom.line, Theme(default_color="black", line_style=[:dash]))
+    empirical_quantiles, model_quantiles = compute_qq_coordinates(pd, y)
 
-    return Gadfly.plot(l2, l1,
-        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
-        Theme(discrete_highlight_color=c->nothing, default_color="grey"))
+    return Gadfly.plot(x=empirical_quantiles, y=model_quantiles, Geom.point, 
+            Geom.abline(color = "black", style = :dash),
+            Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
+            Theme(discrete_highlight_color=c->nothing, default_color="grey"))
 end
 
 """
@@ -116,12 +114,9 @@ function qqplot(x::AbstractVector{<:Real}, y::AbstractVector{<:Real};
 
     x_quantiles, y_quantiles = compute_qq_coordinates(x, y; interpolation = interpolation)
 
-    l1 = layer(x = x_quantiles, y = y_quantiles, Geom.point)
-    l2 = layer(x = x_quantiles[[1, end]], y = x_quantiles[[1, end]],
-               Geom.line, Theme(default_color = "black", line_style = [:dash]))
-
-    return Gadfly.plot(l2, l1,
-        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
-        Theme(discrete_highlight_color = c -> nothing, default_color = "grey"))
+    return Gadfly.plot(x=x_quantiles, y=y_quantiles, Geom.point, 
+            Geom.abline(color = "black", style = :dash),
+            Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title),
+            Theme(discrete_highlight_color=c->nothing, default_color="grey"))
 end
 

@@ -10,11 +10,11 @@ Compute the coordinates for a return level (RL) plot, comparing the empirical an
 - `y`: A vector of real-valued observations.
 
 ### Returns
-A tuple `(empirical_quantile, empirical_return_period, theoretical_quantile)`, where:
+A tuple `(empirical_quantile, empirical_return_period, model_quantile)`, where:
 - `empirical_quantile`: Sorted values of the sample `y`.
 - `empirical_return_period`: Return periods estimated from empirical probabilities using 
   the Gumbel plotting position, i.e., `1 / (1 - F̂)`.
-- `theoretical_quantile`: Quantiles of the distribution `pd` at the same empirical probabilities.
+- `model_quantile`: Quantiles of the distribution `pd` at the same empirical probabilities.
 
 ### Example
 ```julia
@@ -38,9 +38,9 @@ function compute_rl_coordinates(pd::Distribution, y::AbstractVector{<:Real})
     
     empirical_quantile = q
     empirical_return_period = 1 ./ (1 .- p)
-    theoretical_quantile = quantile.(pd, p)
+    model_quantile = quantile.(pd, p)
 
-    return empirical_quantile, empirical_return_period, theoretical_quantile
+    return empirical_quantile, empirical_return_period, model_quantile
 end
 
 
@@ -74,10 +74,10 @@ function returnlevelplot(pd::Distribution, y::AbstractVector{<:Real};
     xlabel::String = "Return Period",
     ylabel::String = "Return Level")
 
-    empirical_quantile, empirical_return_period, theoretical_quantile = compute_rl_coordinates(pd, y)
+    empirical_quantile, empirical_return_period, model_quantile = compute_rl_coordinates(pd, y)
     
     l1 = layer(x = empirical_return_period, y = empirical_quantile, Geom.point)
-    l2 = layer(x = empirical_return_period, y = theoretical_quantile, Geom.line, Theme(default_color="black", line_style=[:dash]))
+    l2 = layer(x = empirical_return_period, y = model_quantile, Geom.line, Theme(default_color="black", line_style=[:dash]))
 
     return plot(l2, l1, Scale.x_log10, Guide.xlabel("Return Period"), Guide.ylabel("Return Level"),
         Guide.title(title), Theme(discrete_highlight_color=c->nothing, default_color="grey")) 

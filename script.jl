@@ -38,3 +38,6 @@ ExtremePlots.probplot(fm)
 ExtremePlots.histplot(fm)
 ExtremePlots.returnlevelplot(fm)
 
+ExtremePlots.qqplotci(fm)
+ExtremePlots.returnlevelplotci(fm)
+
