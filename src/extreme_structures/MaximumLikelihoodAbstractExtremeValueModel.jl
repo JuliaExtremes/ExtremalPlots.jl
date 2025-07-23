@@ -1,9 +1,4 @@
-
-
-
-
-
-function histplot(fm::AbstractFittedExtremeValueModel;
+function histplot(fm::MaximumLikelihoodAbstractExtremeValueModel;
     title::String = "",
     xlabel::String = "Data",
     ylabel::String = "Model density")
@@ -20,7 +15,7 @@ function histplot(fm::AbstractFittedExtremeValueModel;
     
 end
 
-function probplot(fm::AbstractFittedExtremeValueModel;
+function probplot(fm::MaximumLikelihoodAbstractExtremeValueModel;
     title::String = "",
     xlabel::String = "Empirical probability",
     ylabel::String = "Model probability")
@@ -37,7 +32,7 @@ function probplot(fm::AbstractFittedExtremeValueModel;
     
 end
 
-function qqplot(fm::AbstractFittedExtremeValueModel;
+function qqplot(fm::MaximumLikelihoodAbstractExtremeValueModel;
     title::String = "",
     xlabel::String = "Empirical quantile",
     ylabel::String = "Model quantile")
@@ -54,7 +49,7 @@ function qqplot(fm::AbstractFittedExtremeValueModel;
     
 end
 
-function returnlevelplot(fm::AbstractFittedExtremeValueModel;
+function returnlevelplot(fm::MaximumLikelihoodAbstractExtremeValueModel;
     title::String = "",
     xlabel::String = "Return period",
     ylabel::String = "Return level"
@@ -74,7 +69,7 @@ end
 
 
 """
-    qqplotci(fm::AbstractFittedExtremeValueModel, α::Real = 0.05;
+    qqplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real = 0.05;
              title::String = "",
              xlabel::String = "Model quantile",
              ylabel::String = "Empirical quantile")
@@ -86,7 +81,7 @@ The plot compares the empirical quantiles to the model-predicted quantiles,
 and adds pointwise confidence intervals of level `1 - α`.
 
 # Arguments
-- `fm`: A fitted extreme value model (`AbstractFittedExtremeValueModel`)
+- `fm`: A fitted extreme value model (`MaximumLikelihoodAbstractExtremeValueModel`)
 - `α`: Significance level for the interval (default: `0.05`)
 - `title`: Plot title
 - `xlabel`, `ylabel`: Axis labels
@@ -110,7 +105,7 @@ fm = gevfit(y)
 
 qqplotci(fm)
 """
-function qqplotci(fm::AbstractFittedExtremeValueModel, α::Real = 0.05;
+function qqplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real = 0.05;
 title::String = "",
 xlabel::String = "Model quantile",
 ylabel::String = "Empirical quantile")
@@ -143,7 +138,7 @@ return Gadfly.plot(
 end
 
 """
-    returnlevelplotci(fm::AbstractFittedExtremeValueModel, α::Real = 0.05;
+    returnlevelplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real = 0.05;
                       title::String = "",
                       xlabel::String = "Return period",
                       ylabel::String = "Return level")
@@ -157,7 +152,7 @@ The return level plot displays the empirical and model-based return levels again
 return periods on a logarithmic x-axis, with confidence intervals of level `1 - α`.
 
 ### Arguments
-- `fm`: A fitted extreme value model (`AbstractFittedExtremeValueModel`)
+- `fm`: A fitted extreme value model (`MaximumLikelihoodAbstractExtremeValueModel`)
 - `α`: Significance level for the confidence interval (default: `0.05`)
 - `title`: Title of the plot (optional)
 - `xlabel`, `ylabel`: Axis labels (optional)
@@ -185,7 +180,7 @@ fm = gevfit(y)
 
 returnlevelplotci(fm)
 """
-function returnlevelplotci(fm::AbstractFittedExtremeValueModel, α::Real=.05,
+function returnlevelplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real=.05,
     title::String = "",
     xlabel::String = "Return period",
     ylabel::String = "Return level")

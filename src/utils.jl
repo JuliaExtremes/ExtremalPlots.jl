@@ -9,3 +9,8 @@ function ecdf(y::AbstractVector{<:Real})
     p = collect(1:n) ./ (n + 1)  # Gumbel plotting positions
     return ys, p
 end
+
+# TODO move in Extremes.jl
+function isstationary(fm::AbstractExtremeValueModel)
+    return Extremes.getcovariatenumber(fm) == 0
+end

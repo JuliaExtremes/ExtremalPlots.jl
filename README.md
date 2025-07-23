@@ -8,13 +8,17 @@
 ## Features
 - Histogram plot  
 - Mean residual life plot  
-- Probability–probability (PP) plot  
-- Quantile–quantile (QQ) plot  
+- Probability–Probability (PP) plot  
+- Quantile–Quantile (QQ) plot  
 - Return level plot  
 
 The empirical quantiles are computed using Gumbel plotting positions, as recommended by [Makkonen (2006)](https://journals.ametsoc.org/jamc/article/45/2/334/12668/Plotting-Positions-in-Extreme-Value-Analysis).
 
+## Link with Extremes.jl
+
 This package is also compatible with the data structures from [`Extremes.jl`](https://github.com/jojal5/Extremes.jl), a package for extreme value analysis in Julia.
+
+Note that the Bayesian diagnostic plots provided in the current version of this package use the posterior mode as the Bayesian point estimate to construct the plots. Proper Bayesian plots may be included in a future version of the package. Sketches of the corresponding functions are included as comments in the relevant source files.
 
 ### Reference
 Makkonen, L. (2006). Plotting positions in extreme value analysis. *Journal of Applied Meteorology and Climatology*, 45(2), 334–340.
