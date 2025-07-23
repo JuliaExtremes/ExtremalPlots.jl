@@ -7,7 +7,7 @@ function histplot(fm::BayesianAbstractExtremeValueModel;
 
     if isstationary(fm.model)
         m = fm.model.data.value
-        pd = Extremes.getdistribution(fm, θ̂)
+        pd = Extremes.getdistribution(fm.model, θ̂)[]
     else
         m = Extremes.standardize(fm)
         pd = Extremes.standarddist(fm.model)
@@ -25,7 +25,7 @@ function probplot(fm::BayesianAbstractExtremeValueModel;
 
     if isstationary(fm.model)
         m = fm.model.data.value
-        pd = Extremes.getdistribution(fm, θ̂)
+        pd = Extremes.getdistribution(fm.model, θ̂)[]
     else
         m = Extremes.standardize(fm)
         pd = Extremes.standarddist(fm.model)
@@ -44,7 +44,7 @@ function qqplot(fm::BayesianAbstractExtremeValueModel;
 
     if isstationary(fm.model)
         m = fm.model.data.value
-        pd = Extremes.getdistribution(fm, θ̂)
+        pd = Extremes.getdistribution(fm.model, θ̂)[]
     else
         m = Extremes.standardize(fm)
         pd = Extremes.standarddist(fm.model)
@@ -63,7 +63,7 @@ function returnlevelplot(fm::BayesianAbstractExtremeValueModel;
 
     if isstationary(fm.model)
         values = fm.model.data.value
-        pd = Extremes.getdistribution(fm, θ̂)
+        pd = Extremes.getdistribution(fm.model, θ̂)[]
         return ExtremePlots.returnlevelplot(pd, values; title=title, xlabel=xlabel, ylabel=ylabel)
     else
         @warn "The graph is optimized for stationary models; the provided model is not stationary."
@@ -82,7 +82,7 @@ function qqplotci(fm::BayesianAbstractExtremeValueModel, α::Real=0.05;
     @assert isstationary(fm.model) "Confidence intervals are only available for stationary models."
 
     θ̂ = Extremes.findposteriormode(fm)
-    pd = Extremes.getdistribution(fm, θ̂)
+    pd = Extremes.getdistribution(fm.model, θ̂)[]
     empirical_quantiles, model_quantiles = compute_qq_coordinates(pd, fm.model.data.value)
     _, p = ecdf(fm.model.data.value)
 
@@ -116,7 +116,7 @@ function returnlevelplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::R
     @assert isstationary(fm.model) "Confidence intervals are only available for stationary models."
 
     θ̂ = Extremes.findposteriormode(fm)
-    pd = Extremes.getdistribution(fm, θ̂)
+    pd = Extremes.getdistribution(fm.model, θ̂)[]
     empirical_quantile, empirical_return_period, model_quantile = compute_rl_coordinates(pd, fm.model.data.value)
 
     _, p = Extremes.ecdf(fm.model.data.value)
