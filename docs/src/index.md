@@ -1,6 +1,6 @@
-# ExtremalPlots
+# ExtremePlots
 
-**ExtremalPlots.jl** provides plotting tools tailored for extreme value analysis in Julia.
+**ExtremePlots.jl** provides plotting tools tailored for extreme value analysis in Julia.
 
 ## Features
 - Histogram plot  

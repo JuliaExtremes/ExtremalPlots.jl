@@ -1,6 +1,6 @@
-using ExtremalPlots
+using ExtremePlots
 using Test
 
-@testset "ExtremalPlots.jl" begin
+@testset "ExtremePlots.jl" begin
     include("utils_test.jl")
 end

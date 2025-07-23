@@ -1,4 +1,4 @@
-module ExtremalPlots
+module ExtremePlots
 
 using Distributions, Extremes, Gadfly
 

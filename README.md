@@ -1,9 +1,9 @@
-# ExtremalPlots
+# ExtremePlots
 
-[![Build Status](https://github.com/JuliaExtremes/ExtremalPlots.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaExtremes/ExtremalPlots.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![documentation stable](https://img.shields.io/badge/docs-latest-blue.svg)](https://JuliaExtremes.github.io/ExtremalPlots.jl/dev/)
+[![Build Status](https://github.com/JuliaExtremes/ExtremePlots.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaExtremes/ExtremePlots.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![documentation stable](https://img.shields.io/badge/docs-latest-blue.svg)](https://JuliaExtremes.github.io/ExtremePlots.jl/dev/)
 
-**ExtremalPlots.jl** is a Julia package that offers plotting tools specifically designed for extreme value analysis, with [`Gadfly.jl`](https://github.com/GiovineItalia/Gadfly.jl/tree/master) as the plotting backend.
+**ExtremePlots.jl** is a Julia package that offers plotting tools specifically designed for extreme value analysis, with [`Gadfly.jl`](https://github.com/GiovineItalia/Gadfly.jl/tree/master) as the plotting backend.
 
 ## Features
 - Histogram plot  
