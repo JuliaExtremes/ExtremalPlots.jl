@@ -1,7 +1,7 @@
 name = "ExtremePlots"
 uuid = "96740c97-20d1-419e-bd96-765ff0b5546a"
 authors = ["Jonathan Jalbert"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
