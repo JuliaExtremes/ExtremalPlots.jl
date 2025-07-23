@@ -107,7 +107,7 @@ function qqplotci(fm::BayesianAbstractExtremeValueModel, α::Real=0.05;
 end
 
 
-function returnlevelplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real=0.05,
+function returnlevelplotci(fm::BayesianAbstractExtremeValueModel, α::Real=0.05,
     title::String="",
     xlabel::String="Return period",
     ylabel::String="Return level")
