@@ -1,7 +1,7 @@
 function histplot(fm::BayesianAbstractExtremeValueModel;
-    title::String = "",
-    xlabel::String = "Empirical probability",
-    ylabel::String = "Model probability")
+    title::String="",
+    xlabel::String="Empirical probability",
+    ylabel::String="Model probability")
 
     θ̂ = Extremes.findposteriormode(fm)
 
@@ -13,13 +13,13 @@ function histplot(fm::BayesianAbstractExtremeValueModel;
         pd = Extremes.standarddist(fm.model)
     end
 
-     return ExtremePlots.histplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
+    return ExtremePlots.histplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
 end
 
 function probplot(fm::BayesianAbstractExtremeValueModel;
-    title::String = "",
-    xlabel::String = "Empirical probability",
-    ylabel::String = "Model probability")
+    title::String="",
+    xlabel::String="Empirical probability",
+    ylabel::String="Model probability")
 
     θ̂ = Extremes.findposteriormode(fm)
 
@@ -32,13 +32,13 @@ function probplot(fm::BayesianAbstractExtremeValueModel;
     end
 
     return ExtremePlots.probplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
-    
+
 end
 
 function qqplot(fm::BayesianAbstractExtremeValueModel;
-    title::String = "",
-    xlabel::String = "Empirical quantile",
-    ylabel::String = "Model quantile")
+    title::String="",
+    xlabel::String="Empirical quantile",
+    ylabel::String="Model quantile")
 
     θ̂ = Extremes.findposteriormode(fm)
 
@@ -51,13 +51,13 @@ function qqplot(fm::BayesianAbstractExtremeValueModel;
     end
 
     return ExtremePlots.qqplot(pd, m; title=title, xlabel=xlabel, ylabel=ylabel)
-    
+
 end
 
 function returnlevelplot(fm::BayesianAbstractExtremeValueModel;
-    title::String = "",
-    xlabel::String = "Return period",
-    ylabel::String = "Return level")
+    title::String="",
+    xlabel::String="Return period",
+    ylabel::String="Return level")
 
     θ̂ = Extremes.findposteriormode(fm)
 
@@ -69,6 +69,75 @@ function returnlevelplot(fm::BayesianAbstractExtremeValueModel;
         @warn "The graph is optimized for stationary models; the provided model is not stationary."
         return nothing
     end
+end
+
+
+
+function qqplotci(fm::BayesianAbstractExtremeValueModel, α::Real=0.05;
+    title::String="",
+    xlabel::String="Model quantile",
+    ylabel::String="Empirical quantile")
+
+    @assert 0 < α < 1 "The confidence level α must be in (0, 1)."
+    @assert isstationary(fm.model) "Confidence intervals are only available for stationary models."
+
+    θ̂ = Extremes.findposteriormode(fm)
+    pd = Extremes.getdistribution(fm, θ̂)
+    empirical_quantiles, model_quantiles = compute_qq_coordinates(pd, fm.model.data.value)
+    _, p = ecdf(fm.model.data.value)
+
+    q_inf = Vector{Float64}(undef, length(p))
+    q_sup = Vector{Float64}(undef, length(p))
+
+    for (i, pᵢ) in enumerate(p)
+        c = cint(returnlevel(fm, 1 / (1 - pᵢ)), 1 - α)[]
+        q_inf[i] = c[1]
+        q_sup[i] = c[2]
+    end
+
+    return Gadfly.plot(
+        x=model_quantiles, y=empirical_quantiles, ymin=q_inf, ymax=q_sup,
+        Geom.point, Geom.abline(style=:dash), Geom.ribbon,
+        Theme(
+            default_color="black",
+            lowlight_color=c -> "lightgray",
+            discrete_highlight_color=c -> nothing
+        ),
+        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title))
+end
+
+
+function returnlevelplotci(fm::MaximumLikelihoodAbstractExtremeValueModel, α::Real=0.05,
+    title::String="",
+    xlabel::String="Return period",
+    ylabel::String="Return level")
+
+    @assert 0 < α < 1 "The confidence level α must be in (0, 1)."
+    @assert isstationary(fm.model) "Confidence intervals are only available for stationary models."
+
+    θ̂ = Extremes.findposteriormode(fm)
+    pd = Extremes.getdistribution(fm, θ̂)
+    empirical_quantile, empirical_return_period, model_quantile = compute_rl_coordinates(pd, fm.model.data.value)
+
+    _, p = Extremes.ecdf(fm.model.data.value)
+
+    q_inf = Vector{Float64}(undef, length(p))
+    q_sup = Vector{Float64}(undef, length(p))
+
+    for (i, pᵢ) in enumerate(p)
+        c = cint(returnlevel(fm, 1 / (1 - pᵢ)), 1 - α)[]
+        q_inf[i] = c[1]
+        q_sup[i] = c[2]
+    end
+
+    l1 = layer(x=empirical_return_period, y=empirical_quantile, Geom.point, Theme(default_color="black", discrete_highlight_color=c -> nothing))
+    l2 = layer(x=empirical_return_period, y=model_quantile, Geom.line, Theme(default_color="black", line_style=[:dash]))
+    l3 = layer(x=empirical_return_period, ymin=q_inf, ymax=q_sup, Geom.ribbon, Theme(lowlight_color=c -> "lightgray"))
+
+
+    return Gadfly.plot(l1, l2, l3, Scale.x_log10,
+        Guide.xlabel(xlabel), Guide.ylabel(ylabel), Guide.title(title))
+
 end
 
 
